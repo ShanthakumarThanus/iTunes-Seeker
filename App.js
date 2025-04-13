@@ -1,13 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { useEffect, useState } from 'react';
+import { FlatList, StyleSheet, Text, TextInput, View } from 'react-native';
+import ITunesSearch from './components/ItunesSearch';
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Coucou</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+
+  return <ITunesSearch />;
 }
 
 const styles = StyleSheet.create({
