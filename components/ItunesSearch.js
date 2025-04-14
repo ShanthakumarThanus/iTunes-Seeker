@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, FlatList, Image, StyleSheet } from 'react-native';
+import { View, Text, TextInput, FlatList, Image, StyleSheet, Touchable, TouchableOpacity } from 'react-native';
 
 const ITunesSearch = () => {
   const [query, setQuery] = useState('Eminem');
   const [results, setResults] = useState([]);
+  const [searchType, setSearchType] = useState('artist');
 
   const searchMusic = async (searchTerm) => {
     try {
@@ -30,6 +31,16 @@ const ITunesSearch = () => {
         }}
         placeholder="Rechercher un artiste..."
       />
+
+      <View style={{ flexDirection: 'row', justifyContent: 'center'}}>
+        <TouchableOpacity style={styles.button} onPress={() => setSearchType('artist')}>
+          <Text>Artiste</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.button} onPress={() => setSearchType('track')}>
+          <Text>Track</Text>
+        </TouchableOpacity>
+      </View>
 
       <FlatList
         data={results}
@@ -65,6 +76,12 @@ const styles = StyleSheet.create({
   image: { width: 60, height: 60, marginRight: 10, borderRadius: 8 },
   title: { fontSize: 16, fontWeight: 'bold' },
   artist: { fontSize: 14, color: 'gray' },
+  button: {
+    alignItems: 'center',
+    backgroundColor: '#DDDDDD',
+    padding: 10,
+    margin: 10,
+  },
 });
 
 export default ITunesSearch;
