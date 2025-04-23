@@ -62,11 +62,18 @@ const ITunesSearch = () => {
         favorites={favorites}
         onSelect={(track) => {
           setSelectedTrack(track);
-          setShowFavorites(false); // facultatif : cacher la vue après sélection
+          setShowFavorites(false); 
         }}
         onBack={() => setShowFavorites(false)}
         onRemove={(trackId) => {
           setFavorites((prev) => prev.filter((track) => track.trackId !== trackId));
+        }}
+        onRate={(trackId, rating) => {
+          setFavorites((prev) =>
+          prev.map((track) =>
+          track.trackId === trackId ? { ...track, rating} : track
+          )
+        );
         }}
       />
     );

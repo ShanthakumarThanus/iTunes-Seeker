@@ -16,6 +16,14 @@ const FavoritesList = ({ favorites, onSelect, onBack, onRemove, onRate }) => {
                             <View>
                                 <Text style={styles.track}>{item.trackName}</Text>
                                 <Text style={styles.track}>{item.artistName}</Text>
+
+                                <View style={styles.ratingRow}>
+                                    {[1, 2, 3, 4, 5].map((star) => (
+                                        <TouchableOpacity key={star} onPress={() => onRate(item.trackId, star)}>
+                                        <Text style={styles.star}>{star <= item.rating ? '⭐' : '☆'}</Text>
+                                        </TouchableOpacity>
+                                    ))}
+                                </View>
                             </View>
                         </TouchableOpacity>
 
@@ -23,14 +31,6 @@ const FavoritesList = ({ favorites, onSelect, onBack, onRemove, onRate }) => {
                             <TouchableOpacity onPress={() => onRemove(item.trackId)} style={styles.deleteButton}>
                                 <Text style={styles.deleteText}>Supprimer</Text>
                             </TouchableOpacity>
-
-                            <View style={styles.ratingRow}>
-                            {[1, 2, 3, 4, 5].map((star) => (
-                                <TouchableOpacity key={star} onPress={() => onRate(item.trackId, star)}>
-                                <Text style={styles.star}>{star <= item.rating ? '⭐' : '☆'}</Text>
-                                </TouchableOpacity>
-                            ))}
-                            </View>
                         </View>
                     </View>
                 )}
@@ -45,7 +45,7 @@ const FavoritesList = ({ favorites, onSelect, onBack, onRemove, onRate }) => {
 };
 
 const styles = StyleSheet.create({
-    container: { flex: 1, padding: 16, marginTop: 40 },
+    container: { flex: 1, padding: 16, marginTop: 40, backgroundColor: '#313632' },
     title: { fontSize: 24, fontWeight: 'bold', marginBottom: 20 },
     item: {
         flexDirection: 'row',
@@ -92,6 +92,14 @@ const styles = StyleSheet.create({
     likeText: {
         fontSize: 18,
     },
+    ratingRow: {
+        flexDirection: 'row',
+        marginTop: 4,
+    },
+    star: {
+        fontSize: 18,
+        marginRight: 4,
+    }
 });
 
 export default FavoritesList;
