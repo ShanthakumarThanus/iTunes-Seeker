@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, FlatList, Image, StyleSheet, Touchable, TouchableOpacity } from 'react-native';
-import TrackDetail from './TrackDetail';
-import FavoritesList from './FavoritesList';
+import { View, Text, TextInput, FlatList, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import TrackDetail from '../components/TrackDetail';
+import FavoritesList from '../components/FavoritesList';
 
-const ITunesSearch = () => {
+const SearchScreen = () => {
   const [query, setQuery] = useState('Eminem');
   const [results, setResults] = useState([]);
   const [searchType, setSearchType] = useState('artist');
-
   const [selectedTrack, setSelectedTrack] = useState(null);
-
   const [favorites, setFavorites] = useState([]);
   const [showFavorites, setShowFavorites] = useState(false);
 
@@ -29,19 +27,14 @@ const ITunesSearch = () => {
   }, [searchType]);
 
   const getAttribute = () => {
-    if (searchType === 'artist') {
-      return 'artistTerm';
-    } else if (searchType === 'track') {
-      return 'songTerm';
-    }
-  }
+    return searchType === 'artist' ? 'artistTerm' : 'songTerm';
+  };
 
   if (selectedTrack) {
     return (
       <TrackDetail 
-      track={selectedTrack} 
-      onBack={() => setSelectedTrack(null)} 
-      
+        track={selectedTrack}
+        onBack={() => setSelectedTrack(null)}
         onAddToFavorites={(track) => {
           setFavorites((prev) => {
             const alreadyExists = prev.some((item) => item.trackId === track.trackId);
@@ -50,7 +43,7 @@ const ITunesSearch = () => {
             }
             return prev;
           });
-          setSelectedTrack(null); 
+          setSelectedTrack(null);
         }}
       />
     );
@@ -62,7 +55,7 @@ const ITunesSearch = () => {
         favorites={favorites}
         onSelect={(track) => {
           setSelectedTrack(track);
-          setShowFavorites(false); 
+          setShowFavorites(false);
         }}
         onBack={() => setShowFavorites(false)}
         onRemove={(trackId) => {
@@ -70,15 +63,14 @@ const ITunesSearch = () => {
         }}
         onRate={(trackId, rating) => {
           setFavorites((prev) =>
-          prev.map((track) =>
-          track.trackId === trackId ? { ...track, rating} : track
-          )
-        );
+            prev.map((track) =>
+              track.trackId === trackId ? { ...track, rating } : track
+            )
+          );
         }}
       />
     );
   }
-  
 
   return (
     <View style={styles.container}>
@@ -89,10 +81,8 @@ const ITunesSearch = () => {
           setQuery(text);
           searchMusic(text);
         }}
-        placeholder={`Rechercher par ${searchType === 'artist' ? 'artist' : 'titre'}`}
+        placeholder={`Rechercher par ${searchType === 'artist' ? 'artiste' : 'titre'}`}
       />
-
-      
 
       <FlatList
         data={results}
@@ -110,15 +100,13 @@ const ITunesSearch = () => {
         )}
       />
 
-      <View style={{ flexDirection: 'row', justifyContent: 'center'}}>
+      <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
         <TouchableOpacity style={styles.button} onPress={() => setSearchType('artist')}>
           <Text>Artiste</Text>
         </TouchableOpacity>
-
         <TouchableOpacity style={styles.button} onPress={() => setSearchType('track')}>
           <Text>Track</Text>
         </TouchableOpacity>
-
         <TouchableOpacity style={styles.button} onPress={() => setShowFavorites(true)}>
           <Text>Mes favoris</Text>
         </TouchableOpacity>
@@ -146,10 +134,11 @@ const styles = StyleSheet.create({
   artist: { fontSize: 14, color: 'gray' },
   button: {
     alignItems: 'center',
-    
     padding: 10,
     margin: 10,
+    backgroundColor: '#eeeeee',
+    borderRadius: 6,
   },
 });
 
-export default ITunesSearch;
+export default SearchScreen;

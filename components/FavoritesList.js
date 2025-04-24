@@ -45,7 +45,7 @@ const FavoritesList = ({ favorites, onSelect, onBack, onRemove, onRate }) => {
 };
 
 const styles = StyleSheet.create({
-    container: { flex: 1, padding: 16, marginTop: 40, backgroundColor: '#313632' },
+    container: { flex: 1, padding: 16, marginTop: 40, },
     title: { fontSize: 24, fontWeight: 'bold', marginBottom: 20 },
     item: {
         flexDirection: 'row',

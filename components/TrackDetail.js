@@ -4,10 +4,7 @@ import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 const TrackDetail = ({ track, onBack, onAddToFavorites }) => {
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>{track.trackName}</Text>
-            <Text style={styles.artist}>{track.artistName}</Text>
-            <Image source={{ uri: track.artworkUrl100 }} style={styles.image} />
-
+            
             <TouchableOpacity style={styles.button} onPress={onBack}>
                 <Text style={styles.buttonText}>Retour</Text> 
             </TouchableOpacity>
@@ -15,6 +12,10 @@ const TrackDetail = ({ track, onBack, onAddToFavorites }) => {
             <TouchableOpacity onPress={() => onAddToFavorites(track)} style={styles.button}>
                 <Text style={styles.buttonText}>Ajouter à ma base</Text>
             </TouchableOpacity>
+
+            <Image source={{ uri: track.artworkUrl100 }} style={styles.image} />
+            <Text style={styles.title}>{track.trackName}</Text>
+            <Text style={styles.artist}>{track.artistName}</Text>
         </View>
     )
 }
