@@ -4,7 +4,7 @@ import TrackDetail from './TrackDetail';
 import FavoritesList from './FavoritesList';
 
 const ITunesSearch = () => {
-  const [query, setQuery] = useState('Eminem');
+  const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
   const [searchType, setSearchType] = useState('artist');
 
@@ -14,6 +14,10 @@ const ITunesSearch = () => {
   const [showFavorites, setShowFavorites] = useState(false);
 
   const searchMusic = async (searchTerm) => {
+    if (!searchTerm) {
+      setResults([]);
+      return;
+    }
     try {
       const attribute = getAttribute();
       const response = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(searchTerm)}&entity=musicTrack&attribute=${attribute}&limit=10&country=fr`);
@@ -93,7 +97,7 @@ const ITunesSearch = () => {
       />
 
       
-
+      {results.length > 0 ? (
       <FlatList
         data={results}
         keyExtractor={(item) => item.trackId.toString()}
@@ -109,6 +113,13 @@ const ITunesSearch = () => {
           </TouchableOpacity>
         )}
       />
+      ) : (
+        <View style={styles.emptyContainer}>
+          <Text style={styles.emptyMessage}>
+            Veuillez rechercher un morceau ou un artiste
+          </Text>
+        </View>
+      )}
 
       <View style={{ flexDirection: 'row', justifyContent: 'center'}}>
         <TouchableOpacity style={styles.button} onPress={() => setSearchType('artist')}>
@@ -146,10 +157,20 @@ const styles = StyleSheet.create({
   artist: { fontSize: 14, color: 'gray' },
   button: {
     alignItems: 'center',
-    
     padding: 10,
     margin: 10,
   },
+  emptyContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  emptyMessage: {
+    marginTop: 20,
+    textAlign: 'center',
+    fontSize: 16,
+    color: 'gray',
+  },  
 });
 
 export default ITunesSearch;
