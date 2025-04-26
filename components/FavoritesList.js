@@ -63,12 +63,12 @@ const styles = StyleSheet.create({
     empty: { textAlign: 'center', marginTop: 20, color: 'gray' },
     button: {
         marginTop: 20,
-        backgroundColor: '#2196F3',
+        
         padding: 10,
         borderRadius: 8,
         alignSelf: 'center',
     },
-    buttonText: { color: '#fff', fontWeight: 'bold' },
+    buttonText: {  fontWeight: 'bold' },
     actions: {
         flexDirection: 'row',
         alignItems: 'center',

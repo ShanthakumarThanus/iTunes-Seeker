@@ -121,7 +121,7 @@ const ITunesSearch = () => {
         </View>
       )}
 
-      <View style={{ flexDirection: 'row', justifyContent: 'center'}}>
+      <View style={styles.filters}>
         <TouchableOpacity style={styles.button} onPress={() => setSearchType('artist')}>
           <Text>Artiste</Text>
         </TouchableOpacity>
@@ -171,6 +171,21 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: 'gray',
   },  
+  filters: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    backgroundColor: '#fff',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    // Ombre Android
+    elevation: 5,
+  },
 });
 
 export default ITunesSearch;
