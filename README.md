@@ -23,7 +23,6 @@ Réalisée avec Expo, cette app propose une interface fluide et responsive, avec
 - [React Native](https://reactnative.dev/)
 - [Expo](https://expo.dev/)
 - [iTunes Search API](https://affiliate.apple.com/resources/documentation/itunes-store-web-service-search-api/)
-- `useContext` pour la gestion globale des favoris
 
 ---
 
