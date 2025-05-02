@@ -42,4 +42,4 @@ npm install
 expo start
 ```
 ## 🤓 Auteur
-Développé par Thanus SHANTHAKUMAR
+Développé par Thanus SHANTHAKUMAR.
