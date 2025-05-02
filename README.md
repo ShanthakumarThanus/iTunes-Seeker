@@ -41,5 +41,5 @@ npm install
 ```bash
 expo start
 ```
-🤓 Auteur
+## 🤓 Auteur
 Développé par Thanus SHANTHAKUMAR
