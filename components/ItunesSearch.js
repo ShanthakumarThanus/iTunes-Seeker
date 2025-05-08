@@ -6,20 +6,23 @@ import FavoritesList from './FavoritesList';
 const ITunesSearch = () => {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
+  // Type de recherche : artiste ou morceau
   const [searchType, setSearchType] = useState('artist');
-
+  // Morceau sélectionné (pour afficher sa fiche)
   const [selectedTrack, setSelectedTrack] = useState(null);
-
+  // Liste des morceaux favoris
   const [favorites, setFavorites] = useState([]);
   const [showFavorites, setShowFavorites] = useState(false);
 
+  
   const searchMusic = async (searchTerm) => {
     if (!searchTerm) {
       setResults([]);
       return;
     }
     try {
-      const attribute = getAttribute();
+      const attribute = getAttribute(); // Déterminer le type de recherche
+      // Le paramètre `searchTerm` est la chaîne de recherche actuelle (artiste ou titre). 
       const response = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(searchTerm)}&entity=musicTrack&attribute=${attribute}&limit=10&country=fr`);
       const data = await response.json();
       setResults(data.results);
@@ -32,6 +35,7 @@ const ITunesSearch = () => {
     searchMusic(query);
   }, [searchType]);
 
+  // Retourne le paramètre d'attribut selon le type de recherche (recherche par artiste ou par morceau)
   const getAttribute = () => {
     if (searchType === 'artist') {
       return 'artistTerm';
@@ -40,6 +44,7 @@ const ITunesSearch = () => {
     }
   }
 
+  // Affichage de la vue de détail d’un morceau si sélectionné
   if (selectedTrack) {
     return (
       <TrackDetail 
@@ -60,6 +65,7 @@ const ITunesSearch = () => {
     );
   }
 
+// Affichage de la liste des favoris au click d'un son présent dans la liste des morceaux
   if (showFavorites) {
     return (
       <FavoritesList
@@ -83,7 +89,7 @@ const ITunesSearch = () => {
     );
   }
   
-
+// Retourne l'affichage principal 
   return (
     <View style={styles.container}>
       <TextInput
