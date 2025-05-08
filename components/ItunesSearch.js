@@ -53,8 +53,11 @@ const ITunesSearch = () => {
       
         onAddToFavorites={(track) => {
           setFavorites((prev) => {
+            // Récupère les sons déjà présent dans le favoris puis 
             const alreadyExists = prev.some((item) => item.trackId === track.trackId);
+            // Si le morceau n'est pas encore dans les favoris, on l'ajoute
             if (!alreadyExists) {
+              // on copie toutes les infos du morceau, une propriété "liked" par défaut et "rating" (non noté)
               return [...prev, { ...track, liked: false, rating: 0 }];
             }
             return prev;
